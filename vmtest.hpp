@@ -40,9 +40,6 @@ class vmTest : public Test {
         unsigned char* data = t->write<unsigned char>(0, 0);
         string tmp_file = "/fs/tmp/tmp2.txt";
         vm g;
-        FILE *buf = g.createFile(tmp_file);  
-        uint8_t size = (uint8_t)t->unit_size();
-        uint32_t totalsize = t->getSize();
         g.flush_data<unsigned char>(tmp_file, t->unit_size(), 30, t->getSize(), 0,  data);
         g.flush_data<unsigned char>(tmp_file, t->unit_size(), 30, t->getSize(), 30,  data + 30);
         unsigned char* data_g = (unsigned char*)malloc(t->unit_size() * 30);
