@@ -2,6 +2,7 @@
 #define UTENSOR_TENSOR_H
 
 #include "uTensor/util/uTensor_util.hpp"
+#include "uTensor/util/env_memory.hpp"
 #include <initializer_list>
 #include "utensor_string.hpp"
 #include <memory>
@@ -56,6 +57,7 @@ class TensorBase {
 
   void initialize(const TensorShape& vec);
   void allocate(uint8_t unit_size);
+  void allocate_static(uint8_t offset);
 
   ~TensorBase();
 };
@@ -77,6 +79,8 @@ class Tensor : public uTensor {
   virtual void init(const TensorShape& v); 
 
   virtual void init(const TensorShape& v, const void* data); 
+
+  virtual void init(const TensorShape& v, uint8_t offset);
 
   virtual void resize(const TensorShape& v); 
 
@@ -155,6 +159,15 @@ class RamTensor : public Tensor {
 
   RamTensor(const TensorShape& v) : Tensor() {
     Tensor::init(v);
+  }
+
+  RamTensor(std::initializer_list<uint32_t> l, uint8_t offset) {
+    TensorShape v;
+    for (auto i : l) {
+      v.push_back(i);
+    }
+
+    Tensor::init(v, offset);
   }
 
   // PRE:      l, initization list, specifying the element/dimension

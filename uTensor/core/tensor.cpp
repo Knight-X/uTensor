@@ -36,6 +36,11 @@ void TensorBase::allocate(uint8_t unit_size) {
         ERR_EXIT("ran out of memory for %u malloc", (unsigned int)(unit_size * total_size));
 }
 
+void TensorBase::allocate_static(uint8_t offset) {
+    data = allocate_global(offset);
+
+}
+
 TensorBase::~TensorBase() {
     if (data != nullptr) {
         free(data);
@@ -82,6 +87,15 @@ void Tensor::init(const TensorShape& v, const void* data) {
         return;
     }
     s->data = (void *)data;
+}
+
+void Tensor::init(const TensorShape& v, uint8_t offset) {
+
+    s->initialize(v);
+    if (s->data != NULL) {
+        return;
+    }
+    s->allocate_static(offset);
 }
 
 void Tensor::resize(const TensorShape& v) {
