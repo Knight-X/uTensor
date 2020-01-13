@@ -170,6 +170,10 @@ class RamTensor : public Tensor {
     Tensor::init(v, offset);
   }
 
+  RamTensor(uint8_t address) {
+    this->address = address;
+  }
+
   // PRE:      l, initization list, specifying the element/dimension
   // POST:     When a degenerative index is supplied, the pointer
   //          lowest specified dimension is returned.
@@ -187,7 +191,14 @@ class RamTensor : public Tensor {
     return (void*)((T*)s->data + offset);
   }
 
-
+  virtual void resize(const TensorShape& v) {
+    uint32_t size = s->total_size;
+    s->initialize(v);
+    if (size == s->total_size) {
+        return;
+    }
+    s->allocate_static(this->address);
+  }
   // virtual void* read(size_t offset, size_t ele) override{};
   virtual uint16_t unit_size(void) override {
     return sizeof(T);
@@ -197,6 +208,7 @@ class RamTensor : public Tensor {
  private:
   RamTensor(const RamTensor&);
   RamTensor& operator=(const RamTensor&);
+  uint8_t address;
 
 };
 
