@@ -7,6 +7,7 @@
 #ifndef I2Cdev_h
 #define I2Cdev_h
 
+#include <stdint.h>
 
 //static I2C i2c(PTE25, PTE24);
 class I2Cdev {

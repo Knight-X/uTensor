@@ -39,6 +39,7 @@ THE SOFTWARE.
 
 #include "I2Cdev.h"
 #include "helper_3dmath.h"
+#include <stdint.h>
 //#include <avr/pgmspace.h>
 
 #define pgm_read_byte(p) (*(uint8_t *)(p))

@@ -35,8 +35,9 @@ THE SOFTWARE.
 */
 #include <string.h>
 #include <stdint.h>
-#include "MPU6050.h"
+#include "MPU6050_6Axis_MotionApps20.h"
 #include <cstdlib>
+#include <cstdio>
 
 /** Default constructor, uses default I2C address.
  * @see MPU6050_DEFAULT_ADDRESS
@@ -3148,7 +3149,7 @@ uint8_t MPU6050::dmpInitialize() {
     DEBUG_PRINTLN(F("\n\nResetting MPU6050..."));
     reset();
     //usleep(30000); // wait after reset
-    wait_us(300000);
+    //wait_us(300000);
 
     // enable sleep mode and wake cycle
     /*Serial.println(F("Enabling sleep mode..."));
@@ -3200,7 +3201,7 @@ uint8_t MPU6050::dmpInitialize() {
     DEBUG_PRINTLN(F("Resetting I2C Master control..."));
     resetI2CMaster();
     //usleep(20000);
-    wait_us(200000);
+    //wait_us(200000);
 
     // load DMP code into memory banks
     DEBUG_PRINT(F("Writing DMP code to MPU memory banks ("));

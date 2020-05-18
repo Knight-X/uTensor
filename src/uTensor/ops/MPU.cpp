@@ -1,23 +1,25 @@
 
 #include "MPU.hpp"
+
 namespace uTensor {
-void MPU_Op::setup()
+
+void MPU_OP::setup()
 {
-    pc.printf("Initializing I2C devices...\n");
+    //pc.printf("Initializing I2C devices...\n");
     mpu.initialize();
 
     // verify connection
-    pc.printf("Testing device connections...\n");
-    pc.printf(mpu.testConnection() ? "MPU6050 connection successful\n" : "MPU6050 connection failed\n");
+    //pc.printf("Testing device connections...\n");
+    //pc.printf(mpu.testConnection() ? "MPU6050 connection successful\n" : "MPU6050 connection failed\n");
 
     // load and configure the DMP
-    pc.printf("Initializing DMP...\n");
+    //pc.printf("Initializing DMP...\n");
     uint8_t devStatus = mpu.dmpInitialize();
     
     // make sure it worked (returns 0 if so)
     if (devStatus == 0) {
         // turn on the DMP, now that it's ready
-        pc.printf("Enabling DMP...\n");
+        //pc.printf("Enabling DMP...\n");
         this->mpu.setDMPEnabled(true);
 
         // enable Arduino interrupt detection
@@ -26,7 +28,7 @@ void MPU_Op::setup()
         this->mpuIntStatus = mpu.getIntStatus();
 
         // set our DMP Ready flag so the main loop() function knows it's okay to use it
-        pc.printf("DMP ready!\n");
+        //pc.printf("DMP ready!\n");
         this->dmpReady = true;
 
         // get expected DMP packet size for later comparison
@@ -54,7 +56,7 @@ void MPU_OP::kernel()
     } else if (this->fifoCount >= 42) {
         // read a packet from FIFO
 
-        this->mpu.getFIFOBytes(this->fifoBuffer, this->packetSize);
+        this->mpu.getFIFOBytes(fifoBuffer, this->packetSize);
         
 
             // display Euler angles in degrees
