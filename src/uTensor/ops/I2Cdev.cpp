@@ -9,7 +9,7 @@
 
 I2Cdev::I2Cdev()
 {
-    i2c.frequency(400000);
+    //[i2c.frequency(400000);
 
 }
 
@@ -128,8 +128,8 @@ int8_t I2Cdev::readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8
     char command[1];
     command[0] = regAddr;
     char redData[length] = {0};
-    int len = i2c.write(devAddr<<1, command, 1, true);
-    i2c.read(devAddr<<1, redData, length);
+    //int len = i2c.write(devAddr<<1, command, 1, true);
+    //i2c.read(devAddr<<1, redData, length);
     for(int i =0; i < length; i++) {
         int res = data[i] = redData[i];
     }
@@ -254,7 +254,7 @@ bool I2Cdev::writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_
     for(int i = 0; i < length; i++) {
         data_i[i + 1] = data[i];
     }
-    int res =  i2c.write(devAddr<<1, data_i, length + 1, 0);
+    //int res =  i2c.write(devAddr<<1, data_i, length + 1, 0);
     return true;
 }
 

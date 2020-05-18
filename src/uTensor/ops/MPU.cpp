@@ -1,4 +1,6 @@
 
+#include "MPU.hpp"
+namespace uTensor {
 void MPU_Op::setup()
 {
     pc.printf("Initializing I2C devices...\n");
@@ -67,3 +69,4 @@ void MPU_OP::kernel()
 }
 
 
+}

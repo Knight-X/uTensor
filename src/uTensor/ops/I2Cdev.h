@@ -8,7 +8,7 @@
 #define I2Cdev_h
 
 
-static I2C i2c(PTE25, PTE24);
+//static I2C i2c(PTE25, PTE24);
 class I2Cdev {
     public:
         I2Cdev();        
