@@ -14,6 +14,9 @@ set(src_utensor_tensors
    )
 set(src_utensor_ops
     ops/Matrix.cpp
+    ops/MPU6050.cpp
+    ops/I2Cdev.cpp
+    ops/MPU.cpp
    )
 set(src_utensor_errhndl
   errorHandlers/SimpleErrorHandler.cpp
